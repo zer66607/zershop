@@ -18,6 +18,7 @@ from django.urls import path, include
 from zerShop import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
@@ -26,5 +27,6 @@ urlpatterns = [
     path('products/', include('zerShop.urls')),
     path('api/products/', views.ProductListAPI.as_view(), name='api_product_list'),
     path('api/products/update/', views.ProductUpdateAPI.as_view(), name='api_product_update'),
+    path('', RedirectView.as_view(url='products/'), name='home'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
